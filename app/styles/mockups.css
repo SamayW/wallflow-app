@@ -1,0 +1,400 @@
+/* ==========================================================================
+   Wallflow — hand-built UI mockups (no screenshots, no images)
+   All five mockups are DOM + CSS, styled through the shared .glass system.
+   ========================================================================== */
+
+/* -- A: Stage window ------------------------------------------------------*/
+
+.mockup-stage {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-raised);
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.65);
+}
+
+.stage-chrome {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+}
+
+.stage-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.stage-dot--red {
+  background: #ff5f57;
+}
+.stage-dot--yellow {
+  background: #febc2e;
+}
+.stage-dot--green {
+  background: #28c840;
+}
+
+.stage-title {
+  margin-left: var(--space-2);
+  font-size: var(--text-2xs);
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+.stage-canvas {
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  position: relative;
+}
+
+.stage-canvas::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 100%, rgba(0, 0, 0, 0.35), transparent 60%);
+}
+
+.stage-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-glass);
+}
+
+/* -- B: Desktop + Lock twin ------------------------------------------------*/
+
+.twin-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.twin-frame {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 30px 70px -28px rgba(0, 0, 0, 0.6);
+}
+
+.twin-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.twin-label {
+  position: absolute;
+  left: var(--space-3);
+  bottom: var(--space-3);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  background: rgba(11, 13, 20, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.lock-clock {
+  position: absolute;
+  top: var(--space-4);
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: var(--text-lg);
+  font-weight: 300;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 620px) {
+  .twin-preview {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -- C: Display picker ------------------------------------------------------*/
+
+.display-picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-8);
+  padding: var(--space-8) var(--space-6) var(--space-6);
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.display-screen {
+  position: relative;
+  border-radius: 10px;
+  border: 3px solid var(--surface-panel-hover);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
+  transition: border-color var(--duration-medium) var(--ease-standard),
+    box-shadow var(--duration-medium) var(--ease-standard);
+}
+
+.display--laptop .display-screen {
+  width: 200px;
+  aspect-ratio: 16 / 10;
+}
+
+.display--laptop .display-base {
+  width: 230px;
+  height: 10px;
+  margin-top: -1px;
+  background: linear-gradient(180deg, var(--surface-panel-hover), var(--color-bg-raised));
+  border-radius: 0 0 6px 6px;
+}
+
+.display--external .display-screen {
+  width: 190px;
+  aspect-ratio: 16 / 9;
+}
+
+.display--external .display-stand {
+  width: 10px;
+  height: 22px;
+  background: var(--surface-panel-hover);
+  margin-top: -1px;
+}
+
+.display--external .display-foot {
+  width: 64px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-panel-hover);
+  margin-top: 2px;
+}
+
+.display-name {
+  margin-top: var(--space-3);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+}
+
+.display.is-active {
+  color: var(--text-primary);
+}
+
+.display.is-active .display-screen {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 4px rgba(53, 167, 255, 0.18), 0 20px 40px -20px rgba(0, 0, 0, 0.6);
+}
+
+.display:hover .display-screen,
+.display:focus-visible .display-screen {
+  border-color: var(--surface-glass-edge);
+}
+
+.all-displays-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--surface-glass);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.all-displays-toggle input {
+  accent-color: var(--accent-cyan);
+}
+
+@media (max-width: 620px) {
+  .display-picker {
+    justify-content: center;
+  }
+  .all-displays-toggle {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* -- D: Import dropzone ----------------------------------------------------*/
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  text-align: center;
+  padding: var(--space-16) var(--space-6);
+  border-radius: var(--radius-lg);
+  border: 1.5px dashed var(--surface-glass-edge);
+  transition: border-color var(--duration-medium) var(--ease-standard),
+    background var(--duration-medium) var(--ease-standard);
+}
+
+.dropzone-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--text-tertiary);
+  transition: color var(--duration-medium) var(--ease-standard),
+    transform var(--duration-medium) var(--ease-standard);
+}
+
+.dropzone p {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.dropzone-link {
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.dropzone-hint {
+  font-size: var(--text-2xs);
+  color: var(--text-tertiary);
+}
+
+.dropzone.is-hover {
+  border-color: var(--accent-cyan);
+  background: rgba(53, 167, 255, 0.06);
+}
+
+.dropzone.is-hover .dropzone-icon {
+  color: var(--accent-cyan);
+  transform: translateY(-3px);
+}
+
+/* -- E: Menu bar popover -----------------------------------------------------*/
+
+.menubar-mock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+}
+
+.menubar-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--surface-panel);
+}
+
+.menubar-bar-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--text-secondary);
+}
+
+.menubar-icon-btn {
+  width: 16px;
+  height: 16px;
+  color: var(--text-primary);
+  background: var(--surface-glass-strong);
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.menubar-popover {
+  margin-top: var(--space-3);
+  width: 260px;
+  padding: var(--space-4);
+  position: relative;
+}
+
+.menubar-caret {
+  position: absolute;
+  top: -7px;
+  right: 22px;
+  width: 14px;
+  height: 14px;
+  background: var(--surface-glass-strong);
+  transform: rotate(45deg);
+  border-radius: 3px;
+}
+
+.menubar-current {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.menubar-swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  flex: none;
+}
+
+.menubar-name {
+  font-size: var(--text-2xs);
+  font-weight: 650;
+}
+
+.menubar-sub {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.menubar-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.menubar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-2) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-2xs);
+  color: var(--text-secondary);
+  transition: background var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.menubar-row svg {
+  width: 16px;
+  height: 16px;
+}
+
+.menubar-row:hover,
+.menubar-row:focus-visible {
+  background: var(--surface-glass);
+  color: var(--text-primary);
+}
+
+.menubar-row.is-active {
+  color: var(--accent-cyan);
+}
+
+/* -- shared mockup icon sizing ------------------------------------------- */
+
+.icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
